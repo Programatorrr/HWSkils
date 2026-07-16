@@ -1,70 +1,1078 @@
 <!DOCTYPE html>
-<html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Портфолио / GitHub Pages</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <header class="hero">
-      <nav class="nav">
-        <a href="#about">Обо мне</a>
-        <a href="#projects">Проекты</a>
-        <a href="#contact">Контакты</a>
-      </nav>
+<html lang="cs" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      <div class="hero-content">
-        <div>
-          <p class="eyebrow">GitHub Pages • Static Site</p>
-          <h1>Привет, я создаю красивые веб-страницы</h1>
-          <p class="description">
-            Эта страница демонстрирует, как можно быстро собрать современный сайт
-            с отдельными файлами HTML, CSS и JavaScript.
-          </p>
-          <button id="actionButton">Посмотреть эффект</button>
-        </div>
+    <meta
+        name="description"
+        content="Odpovědi Pavla Dikana k výběrovému řízení na pozici IT Operations Engineer se zaměřením na Linux, DevOps, Kubernetes a infrastrukturu."
+    >
 
-        <div class="hero-card">
-          <h3>Текущий статус</h3>
-          <p id="message">Сайт готов к публикации.</p>
+    <meta name="author" content="Pavel Dikan">
+
+    <title>Pavel Dikan | IT Operations Engineer</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <!-- Skip link for keyboard users -->
+    <a class="skip-link" href="#main-content">
+        Přeskočit na obsah
+    </a>
+
+    <!-- Main navigation -->
+    <header class="site-header" id="top">
+        <div class="header-inner">
+            <a class="brand" href="#intro" aria-label="Přejít na začátek stránky">
+                <span class="brand-mark">PD</span>
+
+                <span class="brand-text">
+                    <strong>Pavel Dikan</strong>
+                    <small>IT Operations · Linux · DevOps</small>
+                </span>
+            </a>
+
+            <button
+                class="menu-toggle"
+                id="menu-toggle"
+                type="button"
+                aria-label="Otevřít navigaci"
+                aria-controls="main-navigation"
+                aria-expanded="false"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav
+                class="main-navigation"
+                id="main-navigation"
+                aria-label="Navigace mezi odpověďmi"
+            >
+                <a href="#q1">Situace</a>
+                <a href="#q2">Linux</a>
+                <a href="#q3">Monitoring</a>
+                <a href="#q4">Technologie</a>
+                <a href="#q5">Automatizace</a>
+                <a href="#q6">Infrastruktura</a>
+                <a href="#q7">Rozvoj</a>
+                <a href="#q8">Příklad</a>
+            </nav>
+
+            <button
+                class="theme-toggle"
+                id="theme-toggle"
+                type="button"
+                aria-label="Přepnout barevné téma"
+                title="Přepnout světlé a tmavé téma"
+            >
+                <span class="theme-icon" aria-hidden="true">◐</span>
+                <span class="theme-label">Téma</span>
+            </button>
         </div>
-      </div>
     </header>
 
-    <main>
-      <section id="about" class="section">
-        <h2>Обо мне</h2>
-        <p>
-          Я люблю создавать понятные и стильные интерфейсы, которые работают
-          быстро и выглядят аккуратно на любых устройствах.
-        </p>
-      </section>
+    <main id="main-content">
+        <!-- Hero section -->
+        <section class="hero" id="intro">
+            <div class="hero-content">
+                <p class="eyebrow">
+                    Výběrové řízení · Onlio, a.s.
+                </p>
 
-      <section id="projects" class="section alt">
-        <h2>Проекты</h2>
-        <div class="cards">
-          <article class="mini-card">
-            <h3>Landing Page</h3>
-            <p>Простая и яркая стартовая страница.</p>
-          </article>
-          <article class="mini-card">
-            <h3>UI Components</h3>
-            <p>Блоки, кнопки и карточки для интерфейса.</p>
-          </article>
-          <article class="mini-card">
-            <h3>JavaScript</h3>
-            <p>Интерактивные элементы и анимации.</p>
-          </article>
-        </div>
-      </section>
+                <h1>
+                    IT Operations Engineer
+                    <span>Linux / DevOps</span>
+                </h1>
 
-      <section id="contact" class="section">
-        <h2>Контакты</h2>
-        <p>Напишите мне, если хотите такой же сайт для себя.</p>
-      </section>
+                <p class="hero-lead">
+                    Přehled mých pracovních zkušeností se správou Linuxových
+                    systémů, cloudové infrastruktury, monitoringem,
+                    automatizací a provozem zákaznických prostředí.
+                </p>
+
+                <div class="hero-actions">
+                    <a class="button button-primary" href="#answers">
+                        Zobrazit odpovědi
+                    </a>
+
+                    <a
+                        class="button button-secondary"
+                        href="https://github.com/Programatorrr"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        GitHub profil
+                    </a>
+                </div>
+
+                <div class="status-panel" aria-label="Informace o stránce">
+                    <div class="status-item">
+                        <span class="status-label">Čas v Praze</span>
+                        <strong id="prague-clock">--:--:--</strong>
+                    </div>
+
+                    <div class="status-item">
+                        <span class="status-label">Datum</span>
+                        <strong id="prague-date">--</strong>
+                    </div>
+
+                    <div class="status-item">
+                        <span class="status-label">Čas na stránce</span>
+                        <strong id="page-timer">00:00</strong>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="hero-card">
+                <p class="hero-card-label">Profil</p>
+
+                <h2>Junior Infrastructure Engineer</h2>
+
+                <p>
+                    Praktická zkušenost s Linuxem, cloudovým provozem,
+                    fyzickými servery, řešením incidentů a postupným
+                    zaváděním automatizace.
+                </p>
+
+                <dl class="profile-facts">
+                    <div>
+                        <dt>Lokalita</dt>
+                        <dd>Praha</dd>
+                    </div>
+
+                    <div>
+                        <dt>Dostupnost</dt>
+                        <dd>Plný úvazek</dd>
+                    </div>
+
+                    <div>
+                        <dt>Čeština</dt>
+                        <dd>B2</dd>
+                    </div>
+
+                    <div>
+                        <dt>Angličtina</dt>
+                        <dd>B1, technická komunikace</dd>
+                    </div>
+                </dl>
+            </aside>
+        </section>
+
+        <!-- Short introduction -->
+        <section class="intro-section page-section">
+            <div class="section-heading">
+                <p class="eyebrow">Úvod</p>
+                <h2>Odpovědi k výběrovému řízení</h2>
+            </div>
+
+            <div class="intro-copy">
+                <p>
+                    Dobrý den, paní Tindel,
+                </p>
+
+                <p>
+                    děkuji Vám za zprávu a za možnost podrobněji představit
+                    své zkušenosti. Níže uvádím odpovědi na jednotlivé
+                    otázky včetně ukázek praktické práce s cloudovým
+                    prostředím, Kubernetes, serverovým hardwarem a
+                    zákaznickou infrastrukturou.
+                </p>
+            </div>
+        </section>
+
+        <!-- Answers accordion -->
+        <section class="answers page-section" id="answers">
+            <div class="section-heading">
+                <p class="eyebrow">Otázky 1–8</p>
+                <h2>Pracovní a technické zkušenosti</h2>
+
+                <p>
+                    Jednotlivé bloky lze otevřít samostatně. Navigace v horní
+                    části stránky umožňuje rychlý přechod na konkrétní otázku.
+                </p>
+            </div>
+
+            <div class="accordion" data-accordion>
+                <!-- Question 1 -->
+                <details class="answer-card" id="q1" open>
+                    <summary>
+                        <span class="question-number">01</span>
+
+                        <span class="question-title">
+                            Aktuální pracovní situace a poslední pracovní role
+                        </span>
+
+                        <span class="question-icon" aria-hidden="true">+</span>
+                    </summary>
+
+                    <div class="answer-content">
+                        <div class="answer-text">
+                            <p>
+                                V současnosti dokončuji magisterské studium
+                                informatiky na České zemědělské univerzitě
+                                v Praze. Všechny studijní předměty mám splněné
+                                a zbývá mi pouze obhajoba diplomové práce.
+                                Z tohoto důvodu jsem nyní plně k dispozici pro
+                                práci na hlavní pracovní poměr.
+                            </p>
+
+                            <p>
+                                Moje poslední relevantní pozice byla Junior
+                                Linux Administrator ve společnosti
+                                Cloudinfrastack v Praze. Pracoval jsem
+                                v prostředí velkého privátního cloudu, který
+                                zahrnoval více než 300 fyzických serverů
+                                využívaných různými zákaznickými projekty.
+                            </p>
+
+                            <p>
+                                Každodenní práce spojovala kontrolu provozu,
+                                reakce na monitorovací upozornění, prvotní
+                                analýzu incidentů, práci s Linuxovými
+                                servery, cloudovými virtuálními stroji,
+                                úložištěm a fyzickým hardwarem v datacentru.
+                                Součástí práce byla také komunikace se
+                                zákazníky a kolegy během nepřetržitého
+                                provozu.
+                            </p>
+
+                            <p>
+                                U běžných incidentů jsem samostatně ověřoval
+                                stav serveru, dostupnost služeb, systémové
+                                prostředky, síťovou komunikaci a související
+                                logy. U složitějších nebo rizikových zásahů
+                                jsem problém zdokumentoval a předal
+                                zkušenějšímu administrátorovi s již
+                                připravenými technickými informacemi.
+                            </p>
+                        </div>
+
+                        <div class="media-grid media-grid-two">
+                            <figure class="media-card">
+                                <!-- Add image: images/cloud-workplace.jpg -->
+                                <img
+                                    src="images/cloud-workplace.jpg"
+                                    alt="Pracovní prostředí pro správu cloudové infrastruktury"
+                                    loading="lazy"
+                                    data-lightbox
+                                >
+
+                                <figcaption>
+                                    Pracovní místo používané při diagnostice,
+                                    přípravě serverového hardwaru a řešení
+                                    cloudových incidentů.
+                                </figcaption>
+                            </figure>
+
+                            <figure class="media-card">
+                                <!-- Add image: images/server-rack.jpg -->
+                                <img
+                                    src="images/server-rack.jpg"
+                                    alt="Rack s fyzickými servery a síťovou kabeláží"
+                                    loading="lazy"
+                                    data-lightbox
+                                >
+
+                                <figcaption>
+                                    Fyzická vrstva cloudového prostředí:
+                                    rackové servery, síťové propojení
+                                    a zařízení spravovaná v datacentru.
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Question 2 -->
+                <details class="answer-card" id="q2">
+                    <summary>
+                        <span class="question-number">02</span>
+
+                        <span class="question-title">
+                            Zkušenosti se správou Linux serverů
+                        </span>
+
+                        <span class="question-icon" aria-hidden="true">+</span>
+                    </summary>
+
+                    <div class="answer-content">
+                        <div class="answer-text">
+                            <p>
+                                Nejvíce praktických zkušeností mám se servery
+                                Ubuntu 22.04 a 24.04. V dřívější práci jsem
+                                používal také Astra Linux a nyní si své
+                                znalosti rozšiřuji směrem k prostředí Red Hat
+                                Enterprise Linux.
+                            </p>
+
+                            <p>
+                                Při běžné administraci jsem se připojoval
+                                prostřednictvím SSH, kontroloval stav služeb,
+                                procesů, paměti a diskového prostoru,
+                                vyhodnocoval systémové logy a ověřoval síťovou
+                                dostupnost. Řešil jsem také situace, kdy se
+                                služba nespustila, server neodpovídal,
+                                narůstal objem logů nebo nebyla správně
+                                aplikována centrální konfigurace.
+                            </p>
+
+                            <p>
+                                Při diagnostice postupuji od celkového stavu
+                                systému ke konkrétní službě. Nejprve ověřím,
+                                zda je server dostupný a zda má dostatek
+                                prostředků. Následně zkontroluji službu,
+                                její závislosti, čas vzniku problému,
+                                poslední změny a související záznamy. Po
+                                zásahu vždy ověřuji, zda je služba skutečně
+                                dostupná a zda se její stav vrátil do
+                                monitoringu jako zdravý.
+                            </p>
+
+                            <p>
+                                Absolvoval jsem Red Hat kurzy Enterprise
+                                Linux Technical Overview a Ansible Basics:
+                                Automation Technical Overview. Současně
+                                pokračuji v kurzu Introduction to Linux,
+                                abych propojil praktické zkušenosti
+                                s ucelenou administrátorskou metodikou.
+                            </p>
+                        </div>
+
+                        <div class="media-grid">
+                            <figure class="media-card media-card-wide">
+                                <!-- Add image: images/xeon-bios.jpg -->
+                                <img
+                                    src="images/xeon-bios.jpg"
+                                    alt="Diagnostika serveru v prostředí BIOS"
+                                    loading="lazy"
+                                    data-lightbox
+                                >
+
+                                <figcaption>
+                                    Kontrola serverové konfigurace na úrovni
+                                    BIOSu, rozpoznaného procesoru, operační
+                                    paměti a bootovacího prostředí.
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Question 3 -->
+                <details class="answer-card" id="q3">
+                    <summary>
+                        <span class="question-number">03</span>
+
+                        <span class="question-title">
+                            Provoz aplikací, monitoring a analýza logů
+                        </span>
+
+                        <span class="question-icon" aria-hidden="true">+</span>
+                    </summary>
+
+                    <div class="answer-content">
+                        <div class="answer-text">
+                            <p>
+                                Monitoring a prvotní diagnostika patřily mezi
+                                hlavní části mé práce v Cloudinfrastacku.
+                                Monitorovací prostředí upozorňovalo na
+                                nedostupné servery, nefunkční služby,
+                                problémy s databázemi, úložištěm, síťovými
+                                rozhraními nebo systémovými prostředky.
+                            </p>
+
+                            <p>
+                                Po přijetí upozornění jsem nejprve ověřil,
+                                zda jde o skutečný incident, krátkodobý výkyv
+                                nebo následek plánované změny. Poté jsem
+                                porovnal stav monitoringu s reálným stavem
+                                serveru, systémovými logy a dostupností
+                                navazujících služeb.
+                            </p>
+
+                            <p>
+                                Setkával jsem se například s nedostupnými
+                                hosty, zastavenými službami, problémy
+                                síťového spojení, neúspěšnou aplikací
+                                centrální konfigurace, chybami certifikátů,
+                                upozorněními z databází nebo problémy po
+                                výpadku elektrického napájení.
+                            </p>
+
+                            <p>
+                                Výsledkem mé analýzy nebylo pouze odstranění
+                                jednotlivé chyby. Důležité bylo také
+                                zkontrolovat, zda nedošlo k širšímu dopadu,
+                                zda jsou funkční závislé systémy a zda
+                                monitoring znovu potvrzuje normální provoz.
+                            </p>
+                        </div>
+
+                        <div class="media-grid">
+                            <figure class="media-card media-card-wide">
+                                <!-- Add image: images/network-incident.jpg -->
+                                <img
+                                    src="images/network-incident.jpg"
+                                    alt="Diagnostika nedostupného serveru pomocí síťového testu"
+                                    loading="lazy"
+                                    data-lightbox
+                                >
+
+                                <figcaption>
+                                    Ověření nedostupnosti hostu během
+                                    incidentu. Síťový test ukazuje ztrátu
+                                    komunikace a odpověď Destination Host
+                                    Unreachable.
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Question 4 -->
+                <details class="answer-card" id="q4">
+                    <summary>
+                        <span class="question-number">04</span>
+
+                        <span class="question-title">
+                            Praktické zkušenosti s technologiemi a nástroji
+                        </span>
+
+                        <span class="question-icon" aria-hidden="true">+</span>
+                    </summary>
+
+                    <div class="answer-content">
+                        <div class="answer-text">
+                            <p>
+                                Moje zkušenosti spojují fyzickou
+                                infrastrukturu, operační systémy, cloudové
+                                prostředí a aplikační vrstvu. V produkčním
+                                provozu jsem pracoval se servery Ubuntu,
+                                cloudovými instancemi v OpenStacku,
+                                distribuovaným úložištěm Ceph a centrální
+                                konfigurací pomocí Puppetu a Foremanu.
+                            </p>
+
+                            <p>
+                                V Kubernetes jsem získal praktickou zkušenost
+                                během diplomové práce. Na virtuálním serveru
+                                s Ubuntu jsem vytvořil MicroK8s cluster,
+                                nainstaloval Argo CD, propojil jej
+                                s GitHub repozitářem a nasadil demonstrační
+                                aplikaci pomocí Helm chartu.
+                            </p>
+
+                            <p>
+                                V clusteru jsem pracoval s životním cyklem
+                                aplikačních objektů, sledoval jejich stav,
+                                počet replik, logy a události. Prakticky jsem
+                                ověřil rozdíl mezi požadovaným stavem uloženým
+                                v Gitu a skutečným stavem běžícího prostředí.
+                            </p>
+
+                            <p>
+                                Další zkušenost s Kubernetes vychází
+                                z projektu TeamCity Cloud Remote Shell
+                                Executor. Vytvořil jsem backendovou službu,
+                                která po přijetí uživatelské úlohy
+                                automaticky vytvoří dočasný Kubernetes Pod,
+                                spustí v něm shellový skript, sleduje průběh
+                                úlohy, načte výstup a po dokončení umožní
+                                uvolnit použité prostředky.
+                            </p>
+                        </div>
+
+                        <div class="media-grid media-grid-two">
+                            <figure class="media-card">
+                                <!-- Add image: images/kubernetes-terminal.jpg -->
+                                <img
+                                    src="images/kubernetes-terminal.jpg"
+                                    alt="Terminál s ověřením Kubernetes Deploymentu a Argo CD synchronizace"
+                                    loading="lazy"
+                                    data-lightbox
+                                >
+
+                                <figcaption>
+                                    Praktické ověření stavu Deploymentu,
+                                    Podů, historie synchronizací a funkce
+                                    automatické nápravy v MicroK8s.
+                                </figcaption>
+                            </figure>
+
+                            <figure class="media-card">
+                                <!-- Add image: images/argocd-dashboard.jpg -->
+                                <img
+                                    src="images/argocd-dashboard.jpg"
+                                    alt="Aplikace nginx zobrazená v Argo CD"
+                                    loading="lazy"
+                                    data-lightbox
+                                >
+
+                                <figcaption>
+                                    Argo CD zobrazuje aplikaci jako Healthy
+                                    a Synced, včetně vazby mezi Service,
+                                    Deploymentem, ReplicaSetem a Pody.
+                                </figcaption>
+                            </figure>
+                        </div>
+
+                        <aside class="project-callout">
+                            <p class="project-label">GitHub projekt</p>
+
+                            <h3>TeamCity Cloud Remote Shell Executor</h3>
+
+                            <p>
+                                Projekt demonstruje automatické vytváření
+                                dočasných vzdálených executorů v Kubernetes
+                                a řízení celého životního cyklu úlohy přes
+                                backendové API.
+                            </p>
+
+                            <a
+                                href="https://github.com/Programatorrr/TeamCity-Cloud-Remote-Shell-Executor"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Otevřít repozitář
+                            </a>
+                        </aside>
+                    </div>
+                </details>
+
+                <!-- Question 5 -->
+                <details class="answer-card" id="q5">
+                    <summary>
+                        <span class="question-number">05</span>
+
+                        <span class="question-title">
+                            Automatizace a skriptování
+                        </span>
+
+                        <span class="question-icon" aria-hidden="true">+</span>
+                    </summary>
+
+                    <div class="answer-content">
+                        <div class="answer-text">
+                            <p>
+                                S automatizací jsem pracoval jak v produkčním
+                                prostředí, tak ve vlastních projektech.
+                                V Cloudinfrastacku jsem využíval již
+                                připravenou automatizaci pro centrální správu
+                                konfigurace serverů. Kontroloval jsem průběh
+                                aplikování konfigurace, řešil problémy agentů
+                                a ověřoval stav používaných certifikátů.
+                            </p>
+
+                            <p>
+                                Hlavní výhodou bylo odstranění opakovaných
+                                ručních zásahů. Stejná konfigurace mohla být
+                                řízeně distribuována na větší počet serverů
+                                a v případě chyby bylo možné dohledat, na
+                                kterém hostu a v jakém kroku problém vznikl.
+                            </p>
+
+                            <p>
+                                V diplomové práci jsem automatizaci
+                                implementoval pomocí GitOps. Po změně
+                                konfigurace v Git repozitáři Argo CD
+                                automaticky rozpoznal novou verzi, porovnal
+                                ji s běžícím clusterem a provedl
+                                synchronizaci bez nutnosti ručně aplikovat
+                                manifesty.
+                            </p>
+
+                            <p>
+                                V projektu Remote Shell Executor jsem
+                                automatizoval vytvoření dočasného pracovního
+                                prostředí pro každou úlohu. Uživatel zadá
+                                požadavek a aplikace sama vytvoří Pod,
+                                nastaví mu požadované prostředky, spustí
+                                příkaz, sleduje jeho stav a zpřístupní
+                                výsledek. Manuální vytváření executorů tím
+                                bylo nahrazeno opakovatelným procesem.
+                            </p>
+                        </div>
+
+                        <div class="process-flow" aria-label="Proces automatizace">
+                            <article>
+                                <span>1</span>
+                                <h3>Požadavek</h3>
+                                <p>Uživatel nebo Git vytvoří nový požadovaný stav.</p>
+                            </article>
+
+                            <article>
+                                <span>2</span>
+                                <h3>Validace</h3>
+                                <p>Aplikace ověří vstupy a připraví potřebnou konfiguraci.</p>
+                            </article>
+
+                            <article>
+                                <span>3</span>
+                                <h3>Nasazení</h3>
+                                <p>Kubernetes nebo GitOps controller provede změnu.</p>
+                            </article>
+
+                            <article>
+                                <span>4</span>
+                                <h3>Kontrola</h3>
+                                <p>Systém ověří výsledek, stav workloadu a dostupné logy.</p>
+                            </article>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Question 6 -->
+                <details class="answer-card" id="q6">
+                    <summary>
+                        <span class="question-number">06</span>
+
+                        <span class="question-title">
+                            Správa infrastruktury a zákaznických prostředí
+                        </span>
+
+                        <span class="question-icon" aria-hidden="true">+</span>
+                    </summary>
+
+                    <div class="answer-content">
+                        <div class="answer-text">
+                            <p>
+                                Ve společnosti Cloudinfrastack jsem pracoval
+                                s infrastrukturou, která obsluhovala několik
+                                zákaznických projektů. Incident proto nebylo
+                                možné hodnotit pouze podle jednoho serveru.
+                                Bylo nutné zohlednit jeho roli, navazující
+                                služby, úložiště, síť a případný dopad na
+                                zákazníka.
+                            </p>
+
+                            <p>
+                                Vedle logické správy infrastruktury mám také
+                                praktickou zkušenost s fyzickou vrstvou.
+                                Prováděl jsem montáž a demontáž rackových
+                                serverů, zapojování kabeláže, kontrolu disků,
+                                paměti a základních desek, instalaci
+                                operačních systémů a diagnostiku problémů
+                                při startu zařízení.
+                            </p>
+
+                            <p>
+                                V předchozí práci na univerzitě jsem
+                                spravoval počítačové učebny, pracovní stanice
+                                a uživatelské účty. Nastavoval jsem přístupová
+                                oprávnění a základní bezpečnostní politiky.
+                                Zajišťoval jsem také opravy počítačů,
+                                přípravu softwaru a obnovu systémů.
+                            </p>
+
+                            <p>
+                                Zkušenost ze sítí a telekomunikací mi pomáhá
+                                při infrastrukturním troubleshootingu. Při
+                                problému se proto nedívám pouze na aplikaci,
+                                ale postupně ověřuji fyzické spojení,
+                                síťovou dostupnost, operační systém, službu
+                                a její závislosti.
+                            </p>
+                        </div>
+
+                        <div class="media-grid media-grid-three">
+                            <figure class="media-card">
+                                <!-- Add image: images/server-diagnostics.jpg -->
+                                <img
+                                    src="images/server-diagnostics.jpg"
+                                    alt="Rackové servery během diagnostiky"
+                                    loading="lazy"
+                                    data-lightbox
+                                >
+
+                                <figcaption>
+                                    Diagnostika fyzických serverů podle
+                                    stavových kontrolek, dostupnosti
+                                    a provozního chování.
+                                </figcaption>
+                            </figure>
+
+                            <figure class="media-card">
+                                <!-- Add image: images/optical-network.jpg -->
+                                <img
+                                    src="images/optical-network.jpg"
+                                    alt="Optické rozvody a konektory v distribučním panelu"
+                                    loading="lazy"
+                                    data-lightbox
+                                >
+
+                                <figcaption>
+                                    Práce s optickým rozvodem a kontrola
+                                    správného zapojení jednotlivých
+                                    zákaznických linek.
+                                </figcaption>
+                            </figure>
+
+                            <figure class="media-card">
+                                <!-- Add image: images/ssd-service.jpg -->
+                                <img
+                                    src="images/ssd-service.jpg"
+                                    alt="Příprava a kontrola většího počtu disků"
+                                    loading="lazy"
+                                    data-lightbox
+                                >
+
+                                <figcaption>
+                                    Příprava, třídění a kontrola disků
+                                    používaných při opravách a obnově
+                                    pracovních stanic a serverů.
+                                </figcaption>
+                            </figure>
+                        </div>
+
+                        <div class="media-grid media-grid-two">
+                            <figure class="media-card">
+                                <!-- Add image: images/imac-repair.jpg -->
+                                <img
+                                    src="images/imac-repair.jpg"
+                                    alt="Otevřený počítač iMac během servisní práce"
+                                    loading="lazy"
+                                    data-lightbox
+                                >
+
+                                <figcaption>
+                                    Servis zařízení iMac v rámci modernizace
+                                    školní infrastruktury a přípravy zařízení
+                                    pro další používání.
+                                </figcaption>
+                            </figure>
+
+                            <figure class="media-card">
+                                <!-- Add image: images/infrastructure-lab.jpg -->
+                                <img
+                                    src="images/infrastructure-lab.jpg"
+                                    alt="Počítačová laboratoř s pracovními stanicemi a rackem"
+                                    loading="lazy"
+                                    data-lightbox
+                                >
+
+                                <figcaption>
+                                    Laboratorní infrastruktura používaná pro
+                                    práci se servery, síťovými zařízeními,
+                                    výuku a testování konfigurací.
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Question 7 -->
+                <details class="answer-card" id="q7">
+                    <summary>
+                        <span class="question-number">07</span>
+
+                        <span class="question-title">
+                            Profesní zájem o provoz, automatizaci a bezpečnost
+                        </span>
+
+                        <span class="question-icon" aria-hidden="true">+</span>
+                    </summary>
+
+                    <div class="answer-content">
+                        <div class="answer-text">
+                            <p>
+                                Ano, právě kombinace provozu infrastruktury,
+                                automatizace a bezpečnosti odpovídá směru,
+                                kterým se chci dlouhodobě rozvíjet.
+                            </p>
+
+                            <p>
+                                Moje zkušenosti začínaly u fyzické
+                                infrastruktury, sítí a oprav zařízení.
+                                Následně jsem se posunul ke správě serverů,
+                                monitoringu a cloudovému provozu. V současné
+                                době tyto zkušenosti propojuji s Kubernetes,
+                                GitOps a automatizovanou správou
+                                infrastruktury.
+                            </p>
+
+                            <p>
+                                Bezpečnost vnímám jako součást každého
+                                provozního řešení, nikoliv jako samostatný
+                                krok na konci projektu. Změny by měly být
+                                auditovatelné, uživatelé a služby by měli mít
+                                pouze nezbytná oprávnění a citlivé údaje by
+                                neměly být součástí běžné konfigurace
+                                v otevřené podobě.
+                            </p>
+
+                            <p>
+                                U projektu Remote Shell Executor je tento
+                                pohled obzvlášť důležitý, protože služba
+                                spouští uživatelské příkazy v dočasných
+                                kontejnerech. Produkční varianta by proto
+                                musela omezit oprávnění Podů, síťovou
+                                komunikaci, dobu běhu úloh a spotřebu
+                                systémových prostředků. Současně by bylo
+                                nutné zachovat auditní historii a bezpečně
+                                ověřovat spojení s clusterem.
+                            </p>
+                        </div>
+
+                        <div class="focus-grid">
+                            <article>
+                                <h3>Linux Operations</h3>
+                                <p>
+                                    Prohloubení administrace, diagnostiky
+                                    a práce s enterprise Linux prostředím.
+                                </p>
+                            </article>
+
+                            <article>
+                                <h3>Automation</h3>
+                                <p>
+                                    Nahrazování opakovaných ručních činností
+                                    řízenými a auditovatelnými procesy.
+                                </p>
+                            </article>
+
+                            <article>
+                                <h3>Kubernetes</h3>
+                                <p>
+                                    Správa workloadů, řešení provozních
+                                    problémů a bezpečné řízení životního cyklu.
+                                </p>
+                            </article>
+
+                            <article>
+                                <h3>Security</h3>
+                                <p>
+                                    Omezení oprávnění, bezpečná konfigurace,
+                                    audit změn a ochrana provozních dat.
+                                </p>
+                            </article>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Question 8 -->
+                <details class="answer-card" id="q8">
+                    <summary>
+                        <span class="question-number">08</span>
+
+                        <span class="question-title">
+                            Konkrétní technický problém a způsob řešení
+                        </span>
+
+                        <span class="question-icon" aria-hidden="true">+</span>
+                    </summary>
+
+                    <div class="answer-content">
+                        <div class="answer-text">
+                            <p>
+                                V rámci praktické části diplomové práce jsem
+                                řešil ověření toho, zda GitOps controller
+                                dokáže automaticky opravit neautorizovanou
+                                změnu provedenou přímo v Kubernetes clusteru.
+                            </p>
+
+                            <p>
+                                Požadovaný stav aplikace byl uložen v Git
+                                repozitáři a určoval, že mají být spuštěny dvě
+                                instance nginx. Argo CD měl nastavenou
+                                automatickou synchronizaci, odstranění
+                                neplatných objektů a funkci automatické
+                                nápravy odchylek.
+                            </p>
+
+                            <p>
+                                Pro simulaci provozní chyby jsem ručně změnil
+                                počet replik přímo v clusteru na nulu. Tím
+                                vznikl rozdíl mezi deklarovaným stavem v Git
+                                repozitáři a skutečným stavem Kubernetes.
+                                Následně jsem sledoval stav Deploymentu,
+                                Podů a synchronizační operaci Argo CD.
+                            </p>
+
+                            <p>
+                                Argo CD odchylku rozpoznal a bez dalšího
+                                ručního zásahu obnovil Deployment zpět na dvě
+                                repliky. Nové Pody byly vytvořeny a aplikace
+                                se vrátila do stavu Healthy a Synced.
+                            </p>
+
+                            <p>
+                                Výsledkem bylo praktické potvrzení, že
+                                infrastruktura může být průběžně udržována
+                                podle verzovaného zdroje pravdy. Zároveň
+                                vznikla auditní historie změn v Git
+                                repozitáři i historie synchronizací
+                                v Argo CD.
+                            </p>
+                        </div>
+
+                        <div class="result-timeline">
+                            <article>
+                                <span>01</span>
+                                <div>
+                                    <h3>Výchozí stav</h3>
+                                    <p>Dvě repliky definované v Git repozitáři.</p>
+                                </div>
+                            </article>
+
+                            <article>
+                                <span>02</span>
+                                <div>
+                                    <h3>Simulace chyby</h3>
+                                    <p>Ruční změna Deploymentu na nula replik.</p>
+                                </div>
+                            </article>
+
+                            <article>
+                                <span>03</span>
+                                <div>
+                                    <h3>Detekce odchylky</h3>
+                                    <p>Argo CD porovnalo skutečný a požadovaný stav.</p>
+                                </div>
+                            </article>
+
+                            <article>
+                                <span>04</span>
+                                <div>
+                                    <h3>Automatická obnova</h3>
+                                    <p>Cluster byl obnoven zpět na dvě zdravé repliky.</p>
+                                </div>
+                            </article>
+                        </div>
+
+                        <div class="media-grid media-grid-two">
+                            <figure class="media-card">
+                                <!-- Add image: images/kubernetes-terminal.jpg -->
+                                <img
+                                    src="images/kubernetes-terminal.jpg"
+                                    alt="Terminál zobrazující test automatické obnovy Kubernetes aplikace"
+                                    loading="lazy"
+                                    data-lightbox
+                                >
+
+                                <figcaption>
+                                    Terminál zachycuje ruční změnu počtu
+                                    replik, následné vytvoření nových Podů
+                                    a dokončenou synchronizaci.
+                                </figcaption>
+                            </figure>
+
+                            <figure class="media-card">
+                                <!-- Add image: images/argocd-dashboard.jpg -->
+                                <img
+                                    src="images/argocd-dashboard.jpg"
+                                    alt="Obnovená aplikace ve stavu Healthy a Synced"
+                                    loading="lazy"
+                                    data-lightbox
+                                >
+
+                                <figcaption>
+                                    Výsledný stav po automatické nápravě:
+                                    aplikace je synchronizovaná, zdravá
+                                    a běží ve dvou replikách.
+                                </figcaption>
+                            </figure>
+                        </div>
+
+                        <div class="result-box">
+                            <span class="result-icon" aria-hidden="true">✓</span>
+
+                            <div>
+                                <h3>Výsledek</h3>
+
+                                <p>
+                                    Automatická náprava configuration driftu
+                                    proběhla úspěšně bez zásahu administrátora.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- Contact section -->
+        <section class="contact-section page-section" id="contact">
+            <div class="contact-card">
+                <div>
+                    <p class="eyebrow">Kontakt</p>
+
+                    <h2>Děkuji za Váš čas</h2>
+
+                    <p>
+                        Budu rád za možnost představit své zkušenosti
+                        podrobněji během osobního nebo online pohovoru.
+                    </p>
+                </div>
+
+                <div class="contact-links">
+                    <a href="mailto:subxv1@gmail.com">
+                        subxv1@gmail.com
+                    </a>
+
+                    <a href="tel:+420608820635">
+                        +420 608 820 635
+                    </a>
+
+                    <a
+                        href="https://www.linkedin.com/in/programatorr"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        LinkedIn
+                    </a>
+
+                    <a
+                        href="https://github.com/Programatorrr"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <script src="app.js"></script>
-  </body>
+    <!-- Page footer -->
+    <footer class="site-footer">
+        <div>
+            <strong>Pavel Dikan</strong>
+            <span>IT Operations · Linux · DevOps</span>
+        </div>
+
+        <a href="#top">
+            Zpět nahoru ↑
+        </a>
+    </footer>
+
+    <!-- Image lightbox -->
+    <dialog class="lightbox" id="lightbox">
+        <button
+            class="lightbox-close"
+            id="lightbox-close"
+            type="button"
+            aria-label="Zavřít obrázek"
+        >
+            ×
+        </button>
+
+        <img id="lightbox-image" src="" alt="">
+
+        <p id="lightbox-caption"></p>
+    </dialog>
+
+    <!-- JavaScript fallback -->
+    <noscript>
+        <div class="noscript-message">
+            Pro plnou funkčnost navigace, motivu, hodin a galerie je potřeba
+            povolit JavaScript.
+        </div>
+    </noscript>
+</body>
 </html>
