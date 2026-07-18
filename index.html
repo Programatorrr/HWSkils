@@ -917,87 +917,200 @@ mysql -e "SHOW SLAVE STATUS\G"</code></pre>
                     </div>
                 </details>
 
-                <!-- Question 5 -->
-                <details class="answer-card" id="q5">
-                    <summary>
-                        <span class="question-number">05</span>
+               <!-- Question 5 -->
+<details class="answer-card" id="q5">
+    <summary>
+        <span class="question-number">05</span>
 
-                        <span class="question-title">
-                            Automatizace a skriptování
-                        </span>
+        <span class="question-title">
+            Automatizace monitoringu a predikce incidentů
+        </span>
 
-                        <span class="question-icon" aria-hidden="true">+</span>
-                    </summary>
+        <span class="question-icon" aria-hidden="true">+</span>
+    </summary>
 
-                    <div class="answer-content">
-                        <div class="answer-text">
-                            <p>
-                                S automatizací jsem pracoval jak v produkčním
-                                prostředí, tak ve vlastních projektech.
-                                V Cloudinfrastacku jsem využíval již
-                                připravenou automatizaci pro centrální správu
-                                konfigurace serverů. Kontroloval jsem průběh
-                                aplikování konfigurace, řešil problémy agentů
-                                a ověřoval stav používaných certifikátů.
-                            </p>
+    <div class="answer-content">
+        <div class="answer-text">
+            <p>
+                S automatizací jsem se setkal jak při provozu
+                infrastruktury, tak při práci na vlastních projektech.
+                Zkušenost s monitorovacími alerty mě vedla k vytvoření
+                laboratorního projektu Predictive Alerting for Cloud
+                Metrics, ve kterém jsem se zaměřil na automatické
+                vyhodnocování provozních metrik a včasné rozpoznání
+                zhoršujícího se stavu infrastruktury.
+            </p>
 
-                            <p>
-                                Hlavní výhodou bylo odstranění opakovaných
-                                ručních zásahů. Stejná konfigurace mohla být
-                                řízeně distribuována na větší počet serverů
-                                a v případě chyby bylo možné dohledat, na
-                                kterém hostu a v jakém kroku problém vznikl.
-                            </p>
+            <p>
+                Projekt simuluje časovou řadu cloudových metrik,
+                konkrétně využití CPU, operační paměti, latenci
+                a chybovost služby. Do dat jsou přidány také postupné
+                degradace a incidenty, například rostoucí zatížení,
+                zvýšená latence nebo prudký nárůst chybovosti.
+            </p>
 
-                            <p>
-                                V diplomové práci jsem automatizaci
-                                implementoval pomocí GitOps. Po změně
-                                konfigurace v Git repozitáři Argo CD
-                                automaticky rozpoznal novou verzi, porovnal
-                                ji s běžícím clusterem a provedl
-                                synchronizaci bez nutnosti ručně aplikovat
-                                manifesty.
-                            </p>
+            <p>
+                Nad těmito daty jsem vytvořil automatizovanou pipeline.
+                Skripty nejprve vygenerují vstupní data, následně je
+                rozdělí do časových oken a z každého okna vypočítají
+                statistické charakteristiky. Systém například sleduje
+                průměr, minimum, maximum, směrodatnou odchylku,
+                poslední hodnotu a změnu metriky v čase.
+            </p>
 
-                            <p>
-                                V projektu Remote Shell Executor jsem
-                                automatizoval vytvoření dočasného pracovního
-                                prostředí pro každou úlohu. Uživatel zadá
-                                požadavek a aplikace sama vytvoří Pod,
-                                nastaví mu požadované prostředky, spustí
-                                příkaz, sleduje jeho stav a zpřístupní
-                                výsledek. Manuální vytváření executorů tím
-                                bylo nahrazeno opakovatelným procesem.
-                            </p>
-                        </div>
+            <p>
+                Model pracuje s předchozími třiceti minutami provozu
+                a vyhodnocuje, zda během následujících deseti minut
+                pravděpodobně nastane incident. Pro zachování časové
+                návaznosti jsou trénovací a testovací data rozdělena
+                chronologicky bez náhodného promíchání.
+            </p>
 
-                        <div class="process-flow" aria-label="Proces automatizace">
-                            <article>
-                                <span>1</span>
-                                <h3>Požadavek</h3>
-                                <p>Uživatel nebo Git vytvoří nový požadovaný stav.</p>
-                            </article>
+            <p>
+                Pro klasifikaci jsem vytvořil pipeline využívající
+                standardizaci vstupních hodnot a model Random Forest.
+                Po dokončení trénování se model automaticky uloží
+                a navazující část projektu provede jeho vyhodnocení
+                a vytvoří grafické výstupy s výslednými rizikovými
+                skóre.
+            </p>
+        </div>
 
-                            <article>
-                                <span>2</span>
-                                <h3>Validace</h3>
-                                <p>Aplikace ověří vstupy a připraví potřebnou konfiguraci.</p>
-                            </article>
+        <!-- Automated pipeline -->
+        <div class="process-flow">
+            <article>
+                <span>1</span>
 
-                            <article>
-                                <span>3</span>
-                                <h3>Nasazení</h3>
-                                <p>Kubernetes nebo GitOps controller provede změnu.</p>
-                            </article>
+                <h3>Generování metrik</h3>
 
-                            <article>
-                                <span>4</span>
-                                <h3>Kontrola</h3>
-                                <p>Systém ověří výsledek, stav workloadu a dostupné logy.</p>
-                            </article>
-                        </div>
-                    </div>
-                </details>
+                <p>
+                    Skript vytvoří časovou řadu CPU, RAM, latence,
+                    chybovosti a simulovaných incidentů.
+                </p>
+            </article>
+
+            <article>
+                <span>2</span>
+
+                <h3>Zpracování dat</h3>
+
+                <p>
+                    Data jsou rozdělena do časových oken a převedena
+                    na statistické vlastnosti použitelné pro model.
+                </p>
+            </article>
+
+            <article>
+                <span>3</span>
+
+                <h3>Trénování modelu</h3>
+
+                <p>
+                    Model se učí na starší části časové řady
+                    a ověřuje se na pozdějších datech.
+                </p>
+            </article>
+
+            <article>
+                <span>4</span>
+
+                <h3>Vyhodnocení rizika</h3>
+
+                <p>
+                    Pipeline uloží model, vyhodnotí predikce
+                    a vytvoří grafické výstupy.
+                </p>
+            </article>
+        </div>
+
+        <div class="answer-text">
+            <p>
+                Celé prostředí jsem zabalil do Dockeru a jednotlivé
+                kroky lze spustit opakovatelně jedním příkazem.
+                Díky tomu není nutné ručně instalovat jednotlivé
+                knihovny ani postupně spouštět každý skript.
+            </p>
+        </div>
+
+        <!-- Command examples -->
+        <div class="command-grid">
+            <article class="command-card">
+                <h3>Spuštění celé pipeline</h3>
+
+                <pre><code>docker-compose up --build</code></pre>
+
+                <p>
+                    Docker sestaví prostředí a spustí zpracování dat,
+                    trénování i vyhodnocení ve stejném reprodukovatelném
+                    prostředí.
+                </p>
+            </article>
+
+            <article class="command-card">
+                <h3>Automatické testování</h3>
+
+                <pre><code>python -m unittest discover tests</code></pre>
+
+                <p>
+                    Unit testy ověřují důležitou logiku zpracování
+                    časových oken a přípravy dat.
+                </p>
+            </article>
+        </div>
+
+        <div class="answer-text">
+            <p>
+                Součástí projektu je také automatické spouštění testů
+                prostřednictvím GitHub Actions při změnách v repozitáři.
+                Automatizace mi tak umožnila opakovat celý proces
+                stejným způsobem, rychle odhalit chybu v datové pipeline
+                a ověřit, že změna kódu nepoškodila předchozí funkčnost.
+            </p>
+
+            <p>
+                Projekt používá syntetická data a není prezentován
+                jako produkční monitorovací systém. Jeho cílem bylo
+                prakticky propojit mé zkušenosti s monitoringem
+                infrastruktury, Python skriptováním, Dockerem,
+                automatickým testováním a vyhodnocováním provozních
+                metrik.
+            </p>
+
+            <p>
+                Druhým příkladem automatizace je můj projekt Remote
+                Shell Executor popsaný v předchozí části. V něm jsem
+                automatizoval vytváření dočasných Kubernetes Podů,
+                spouštění shellových úloh, čtení logů a odstraňování
+                prostředků po dokončení práce.
+            </p>
+        </div>
+
+        <!-- GitHub project -->
+        <aside class="project-callout">
+            <p class="project-label">
+                GitHub projekt
+            </p>
+
+            <h3>
+                Predictive Alerting for Cloud Metrics
+            </h3>
+
+            <p>
+                Automatizovaná Python pipeline pro simulaci cloudových
+                metrik, přípravu časových oken, trénování klasifikačního
+                modelu, testování a vyhodnocení rizika budoucího incidentu.
+            </p>
+
+            <a
+                href="https://github.com/Programatorrr/cloud-metrics-incident-prediction"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Otevřít repozitář
+            </a>
+        </aside>
+    </div>
+</details>
 
                 <!-- Question 6 -->
                 <!-- Question 6 -->
