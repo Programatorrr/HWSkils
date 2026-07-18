@@ -133,48 +133,48 @@ function updateHeader() {
 updateHeader();
 addEventListener("scroll", updateHeader, { passive: true });
 
+
 /* Accordion behavior */
+function restoreScrollPosition(position) {
+    const previousBehavior = root.style.scrollBehavior;
+
+    /* Disable smooth scrolling during layout changes */
+    root.style.scrollBehavior = "auto";
+    window.scrollTo(0, position);
+
+    requestAnimationFrame(() => {
+        root.style.scrollBehavior = previousBehavior;
+    });
+}
+
 function openAnswer(id) {
     const selected = document.getElementById(id);
 
     if (!(selected instanceof HTMLDetailsElement)) return;
 
-    answers.forEach(answer => {
-        answer.open = answer === selected;
-    });
+    /* Keep other sections open */
+    selected.open = true;
 }
 
-/* Accordion without unexpected page jumps */
 answers.forEach(answer => {
     const summary = $("summary", answer);
 
     summary?.addEventListener("click", event => {
         event.preventDefault();
 
-        const positionBefore = summary.getBoundingClientRect().top;
-        const shouldOpen = !answer.open;
+        const scrollPosition = window.scrollY;
 
-        /* Keep only one answer open */
-        if (shouldOpen) {
-            answers.forEach(other => {
-                if (other !== answer) other.open = false;
-            });
-        }
+        /* Toggle only the selected section */
+        answer.open = !answer.open;
 
-        answer.open = shouldOpen;
-
-        /* Preserve the clicked question's screen position */
+        /* Prevent browser scroll anchoring after content expansion */
         requestAnimationFrame(() => {
-            const positionAfter = summary.getBoundingClientRect().top;
-
-            window.scrollBy({
-                top: positionAfter - positionBefore,
-                behavior: "auto"
+            requestAnimationFrame(() => {
+                restoreScrollPosition(scrollPosition);
             });
         });
     });
 });
-
 /* Navigation scrolling */
 navLinks.forEach(link => {
     link.addEventListener("click", event => {
