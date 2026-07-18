@@ -143,12 +143,33 @@ function openAnswer(id) {
     });
 }
 
+/* Accordion without unexpected page jumps */
 answers.forEach(answer => {
-    answer.addEventListener("toggle", () => {
-        if (!answer.open) return;
+    const summary = $("summary", answer);
 
-        answers.forEach(other => {
-            if (other !== answer) other.open = false;
+    summary?.addEventListener("click", event => {
+        event.preventDefault();
+
+        const positionBefore = summary.getBoundingClientRect().top;
+        const shouldOpen = !answer.open;
+
+        /* Keep only one answer open */
+        if (shouldOpen) {
+            answers.forEach(other => {
+                if (other !== answer) other.open = false;
+            });
+        }
+
+        answer.open = shouldOpen;
+
+        /* Preserve the clicked question's screen position */
+        requestAnimationFrame(() => {
+            const positionAfter = summary.getBoundingClientRect().top;
+
+            window.scrollBy({
+                top: positionAfter - positionBefore,
+                behavior: "auto"
+            });
         });
     });
 });
