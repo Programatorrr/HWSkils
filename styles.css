@@ -2026,3 +2026,32 @@ html[data-theme="dark"] .technical-note code {
     color: var(--green);
     background: rgba(255, 255, 255, 0.06);
 }
+/* Secondary project card */
+.project-callout-secondary {
+    margin-top: 24px;
+    background:
+        linear-gradient(
+            135deg,
+            var(--surface-alt),
+            var(--surface)
+        );
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+}
+
+.project-callout-secondary h3 {
+    color: var(--navy);
+}
+
+.project-callout-secondary > p:not(.project-label) {
+    color: var(--text-soft);
+}
+
+.project-callout-secondary a {
+    color: var(--navy);
+    background: var(--green);
+}
+
+html[data-theme="dark"] .project-callout-secondary h3 {
+    color: var(--text);
+}
