@@ -290,79 +290,205 @@
                 </details>
 
                 <!-- Question 2 -->
-                <details class="answer-card" id="q2">
-                    <summary>
-                        <span class="question-number">02</span>
+<details class="answer-card" id="q2">
+    <summary>
+        <span class="question-number">02</span>
 
-                        <span class="question-title">
-                            Zkušenosti se správou Linux serverů
-                        </span>
+        <span class="question-title">
+            Zkušenosti se správou Linux serverů
+        </span>
 
-                        <span class="question-icon" aria-hidden="true">+</span>
-                    </summary>
+        <span class="question-icon" aria-hidden="true">+</span>
+    </summary>
 
-                    <div class="answer-content">
-                        <div class="answer-text">
-                            <p>
-                                Nejvíce praktických zkušeností mám se servery
-                                Ubuntu 22.04 a 24.04. V dřívější práci jsem
-                                používal také Astra Linux a nyní si své
-                                znalosti rozšiřuji směrem k prostředí Red Hat
-                                Enterprise Linux.
-                            </p>
+    <div class="answer-content">
+        <div class="answer-text">
+            <p>
+                Nejvíce praktických zkušeností mám se servery Ubuntu
+                22.04 a 24.04. V předchozích pracovních prostředích
+                jsem používal také Astra Linux a své znalosti nyní
+                rozšiřuji směrem k enterprise distribucím založeným
+                na Red Hat Linuxu, CentOS Stream a openSUSE.
+            </p>
 
-                            <p>
-                                Při běžné administraci jsem se připojoval
-                                prostřednictvím SSH, kontroloval stav služeb,
-                                procesů, paměti a diskového prostoru,
-                                vyhodnocoval systémové logy a ověřoval síťovou
-                                dostupnost. Řešil jsem také situace, kdy se
-                                služba nespustila, server neodpovídal,
-                                narůstal objem logů nebo nebyla správně
-                                aplikována centrální konfigurace.
-                            </p>
+            <p>
+                Při každodenní administraci jsem se k serverům
+                připojoval prostřednictvím SSH, kontroloval stav
+                systémových služeb, běžící procesy, zatížení CPU,
+                využití operační paměti, diskový prostor a síťovou
+                dostupnost. Při problému jsem nejprve ověřil celkový
+                stav serveru a následně pokračoval ke konkrétní
+                službě, jejím logům a závislostem.
+            </p>
 
-                            <p>
-                                Při diagnostice postupuji od celkového stavu
-                                systému ke konkrétní službě. Nejprve ověřím,
-                                zda je server dostupný a zda má dostatek
-                                prostředků. Následně zkontroluji službu,
-                                její závislosti, čas vzniku problému,
-                                poslední změny a související záznamy. Po
-                                zásahu vždy ověřuji, zda je služba skutečně
-                                dostupná a zda se její stav vrátil do
-                                monitoringu jako zdravý.
-                            </p>
+            <p>
+                Pro základní kontrolu serveru jsem používal například
+                příkazy <code>uptime</code>, <code>top</code>,
+                <code>ps</code>, <code>free</code>,
+                <code>df</code>, <code>du</code>,
+                <code>lsblk</code>, <code>systemctl</code>
+                a <code>journalctl</code>. Pomocí nich jsem ověřoval,
+                zda problém způsobuje nedostatek prostředků,
+                zastavený proces, zaplněný disk nebo chyba konkrétní
+                systémové služby.
+            </p>
+        </div>
 
-                            <p>
-                                Absolvoval jsem Red Hat kurzy Enterprise
-                                Linux Technical Overview a Ansible Basics:
-                                Automation Technical Overview. Současně
-                                pokračuji v kurzu Introduction to Linux,
-                                abych propojil praktické zkušenosti
-                                s ucelenou administrátorskou metodikou.
-                            </p>
-                        </div>
+        <!-- Linux administration commands -->
+        <div class="command-grid">
+            <article class="command-card">
+                <h3>Procesy a zatížení systému</h3>
 
-                        <div class="media-grid">
-                            <figure class="media-card media-card-wide">
-                                <!-- Add image: images/xeon-bios.jpg -->
-                                <img
-                                    src="images/xeon-bios.jpg"
-                                    alt="Diagnostika serveru v prostředí BIOS"
-                                    loading="lazy"
-                                    data-lightbox
-                                >
+                <pre><code>uptime
+top
+ps aux --sort=-%cpu | head
+ps aux --sort=-%mem | head
+pgrep -af nginx</code></pre>
 
-                                <figcaption>
-                                    Kontrola serverové konfigurace na úrovni
-                                    BIOSu, rozpoznaného procesoru, operační
-                                    paměti a bootovacího prostředí.
-                                </figcaption>
-                            </figure>
-                        </div>
-                    </div>
-                </details>
+                <p>
+                    Kontrola zatížení serveru, procesů s nejvyšší
+                    spotřebou CPU nebo paměti a vyhledání konkrétní
+                    běžící služby.
+                </p>
+            </article>
+
+            <article class="command-card">
+                <h3>Operační paměť</h3>
+
+                <pre><code>free -h
+vmstat 1 5
+cat /proc/meminfo
+swapon --show</code></pre>
+
+                <p>
+                    Ověření dostupné paměti, využití swapu a toho,
+                    zda server netrpí dlouhodobým nedostatkem RAM.
+                </p>
+            </article>
+
+            <article class="command-card">
+                <h3>Disky a souborové systémy</h3>
+
+                <pre><code>df -hT
+lsblk -f
+du -xhd1 /var | sort -h
+find /var/log -type f -size +500M -ls</code></pre>
+
+                <p>
+                    Kontrola zaplnění disků, typu souborového systému,
+                    připojených svazků a vyhledání adresářů nebo logů,
+                    které spotřebovávají nejvíce prostoru.
+                </p>
+            </article>
+
+            <article class="command-card">
+                <h3>Služby a systémové logy</h3>
+
+                <pre><code>systemctl status nginx
+systemctl --failed
+journalctl -u nginx --since "1 hour ago"
+journalctl -p err -b</code></pre>
+
+                <p>
+                    Kontrola stavu služby, neúspěšných systemd jednotek
+                    a chyb zaznamenaných od posledního spuštění serveru.
+                </p>
+            </article>
+        </div>
+
+        <div class="answer-text">
+            <p>
+                Znalosti Linuxu si dále systematicky rozšiřuji
+                prostřednictvím kurzu Introduction to Linux 1.
+                V laboratorním prostředí porovnávám administraci
+                distribucí Ubuntu, CentOS a openSUSE, včetně práce
+                s balíčkovacími systémy a základní konfigurací serveru.
+            </p>
+        </div>
+
+        <!-- Course screenshot -->
+        <div class="media-grid">
+            <figure class="media-card media-card-wide">
+                <img
+                    src="images/linux-course-package-management.jpg"
+                    alt="Praktická část kurzu Introduction to Linux 1"
+                    loading="lazy"
+                    data-lightbox
+                >
+
+                <figcaption>
+                    Praktická část kurzu Introduction to Linux 1.
+                    Na snímku porovnávám práci s různými distribucemi
+                    a správu balíčků v prostředí openSUSE pomocí
+                    nástroje zypper.
+                </figcaption>
+            </figure>
+        </div>
+
+        <div class="answer-text">
+            <p>
+                Součástí mé zkušenosti není pouze vzdálená práce
+                s operačním systémem. Pracoval jsem také přímo
+                s fyzickými rackovými servery, jejich instalací,
+                kontrolou komponent, výměnou paměti, disků
+                a diagnostikou problémů při startu. Díky tomu dokážu
+                lépe rozlišit, zda se problém nachází na úrovni
+                aplikace, operačního systému, disku nebo fyzického
+                hardwaru.
+            </p>
+        </div>
+
+        <!-- Physical server hardware -->
+        <div class="media-grid">
+            <figure class="media-card media-card-wide">
+                <img
+                    src="images/server-hardware-lab.jpg"
+                    alt="Příprava a diagnostika fyzických rackových serverů"
+                    loading="lazy"
+                    data-lightbox
+                >
+
+                <figcaption>
+                    Pracoviště pro přípravu a diagnostiku fyzických
+                    rackových serverů, paměťových modulů, disků
+                    a dalších serverových komponent.
+                </figcaption>
+            </figure>
+        </div>
+
+        <div class="media-grid media-grid-two">
+            <figure class="media-card">
+                <img
+                    src="images/datacenter-console.jpg"
+                    alt="Servisní konzole v serverové místnosti"
+                    loading="lazy"
+                    data-lightbox
+                >
+
+                <figcaption>
+                    Lokální servisní konzole používaná při diagnostice
+                    serveru přímo v datacentru, například při problému
+                    s bootováním nebo síťovou dostupností.
+                </figcaption>
+            </figure>
+
+            <figure class="media-card">
+                <img
+                    src="images/server-mainboard.jpg"
+                    alt="Serverová základní deska s paměťovými moduly"
+                    loading="lazy"
+                    data-lightbox
+                >
+
+                <figcaption>
+                    Kontrola serverové základní desky, procesorových
+                    patic, paměťových slotů a souvisejících hardwarových
+                    komponent.
+                </figcaption>
+            </figure>
+        </div>
+    </div>
+</details>
 
                 <!-- Question 3 -->
                 <details class="answer-card" id="q3">
