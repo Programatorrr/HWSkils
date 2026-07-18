@@ -513,7 +513,34 @@ h3 {
     color: #fff;
     background: var(--navy);
 }
+/* CV download button */
+.button-cv {
+    color: var(--navy);
+    background: var(--surface);
+    border-color: var(--green);
+    box-shadow: var(--shadow-sm);
+}
 
+.button-cv::after {
+    content: "↓";
+}
+
+.button-cv:hover {
+    color: var(--navy);
+    background: var(--green);
+    border-color: var(--green);
+    box-shadow: var(--shadow-green);
+}
+
+html[data-theme="dark"] .button-cv {
+    color: #fff;
+    background: var(--surface);
+}
+
+html[data-theme="dark"] .button-cv:hover {
+    color: var(--navy);
+    background: var(--green);
+}
 .status-panel {
     display: grid;
     max-width: 760px;
