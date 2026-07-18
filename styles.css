@@ -184,7 +184,98 @@ h3 {
     width: min(calc(100% - 40px), var(--content-width));
     margin-inline: auto;
 }
+/* =========================
+   Developer signature
+   ========================= */
 
+.footer-profile {
+    display: grid;
+}
+
+.footer-actions {
+    display: flex;
+    align-items: center;
+    gap: 34px;
+}
+
+.developer-credit {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    color: var(--text);
+    text-decoration: none;
+    transition:
+        color var(--transition),
+        transform var(--transition);
+}
+
+.developer-credit__icon {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    color: var(--navy);
+    background: var(--green);
+    border-radius: 50%;
+    box-shadow: 0 8px 20px rgba(123, 190, 0, 0.22);
+    font-family:
+        "Cascadia Code",
+        "JetBrains Mono",
+        Consolas,
+        monospace;
+    font-size: 0.85rem;
+    font-weight: 900;
+    transition:
+        background var(--transition),
+        transform var(--transition);
+}
+
+.developer-credit__text {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 5px;
+    color: var(--text-soft);
+    font-size: 0.83rem;
+    letter-spacing: 0.01em;
+}
+
+.developer-credit__text strong {
+    position: relative;
+    color: var(--text);
+    font-size: 0.9rem;
+}
+
+.developer-credit__text strong::after {
+    position: absolute;
+    right: 0;
+    bottom: -4px;
+    left: 0;
+    height: 3px;
+    content: "";
+    background: var(--green);
+    border-radius: 20px;
+    transform: scaleX(0.35);
+    transform-origin: left;
+    transition: transform var(--transition);
+}
+
+.developer-credit:hover {
+    color: var(--green-dark);
+    transform: translateY(-2px);
+}
+
+.developer-credit:hover .developer-credit__icon {
+    background: #8bd500;
+    transform: rotate(-5deg) scale(1.05);
+}
+
+.developer-credit:hover .developer-credit__text strong::after {
+    transform: scaleX(1);
+}
+
+html[data-theme="dark"] .developer-credit__icon {
+    color: var(--navy);
+}
 .page-section {
     padding-block: clamp(72px, 9vw, 130px);
 }
