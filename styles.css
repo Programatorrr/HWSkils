@@ -1570,8 +1570,23 @@ html[data-theme="dark"] .button-cv:hover {
 }
 
 @media (max-width: 680px) {
+   .footer-actions {
+    width: 100%;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.developer-credit {
+    width: 100%;
+}
+
+.developer-credit__text {
+    flex-wrap: wrap;
+}
     :root {
         --header-height: 68px;
+       
     }
 
     .page-section,
