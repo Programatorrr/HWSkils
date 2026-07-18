@@ -1478,144 +1478,248 @@ ceph osd tree</code></pre>
                     </div>
                 </details>
 
-                <!-- Question 8 -->
-                <details class="answer-card" id="q8">
-                    <summary>
-                        <span class="question-number">08</span>
+         <!-- Question 8 -->
+<details class="answer-card" id="q8">
+    <summary>
+        <span class="question-number">08</span>
 
-                        <span class="question-title">
-                            Konkrétní technický problém a způsob řešení
-                        </span>
+        <span class="question-title">
+            Obnova SSL certifikátu Puppet agenta
+        </span>
 
-                        <span class="question-icon" aria-hidden="true">+</span>
-                    </summary>
+        <span class="question-icon" aria-hidden="true">+</span>
+    </summary>
 
-                    <div class="answer-content">
-                        <div class="answer-text">
-                            <p>
-                                V rámci praktické části diplomové práce jsem
-                                řešil ověření toho, zda GitOps controller
-                                dokáže automaticky opravit neautorizovanou
-                                změnu provedenou přímo v Kubernetes clusteru.
-                            </p>
+    <div class="answer-content">
+        <div class="answer-text">
+            <p>
+                Jedním z konkrétních problémů, které jsem řešil
+                v cloudovém prostředí, byla neúspěšná komunikace
+                Linuxového serveru s Puppet serverem kvůli starému
+                nebo neplatnému SSL certifikátu.
+            </p>
 
-                            <p>
-                                Požadovaný stav aplikace byl uložen v Git
-                                repozitáři a určoval, že mají být spuštěny dvě
-                                instance nginx. Argo CD měl nastavenou
-                                automatickou synchronizaci, odstranění
-                                neplatných objektů a funkci automatické
-                                nápravy odchylek.
-                            </p>
+            <p>
+                Problém se projevil tím, že Puppet agent nedokázal
+                stáhnout a aplikovat aktuální konfiguraci. Ruční
+                spuštění agenta skončilo chybou související
+                s ověřením certifikátu, takže bylo potřeba obnovit
+                vztah důvěry mezi spravovaným serverem a Puppet CA.
+            </p>
 
-                            <p>
-                                Pro simulaci provozní chyby jsem ručně změnil
-                                počet replik přímo v clusteru na nulu. Tím
-                                vznikl rozdíl mezi deklarovaným stavem v Git
-                                repozitáři a skutečným stavem Kubernetes.
-                                Následně jsem sledoval stav Deploymentu,
-                                Podů a synchronizační operaci Argo CD.
-                            </p>
+            <p>
+                Nejprve jsem se přes SSH připojil na postižený server
+                a ručně spustil Puppet agenta. Tím jsem ověřil,
+                že nejde pouze o krátkodobou síťovou chybu, ale
+                skutečně o problém s certifikátem.
+            </p>
+        </div>
 
-                            <p>
-                                Argo CD odchylku rozpoznal a bez dalšího
-                                ručního zásahu obnovil Deployment zpět na dvě
-                                repliky. Nové Pody byly vytvořeny a aplikace
-                                se vrátila do stavu Healthy a Synced.
-                            </p>
+        <div class="command-grid">
+            <article class="command-card">
+                <h3>Ověření problému na agentovi</h3>
 
-                            <p>
-                                Výsledkem bylo praktické potvrzení, že
-                                infrastruktura může být průběžně udržována
-                                podle verzovaného zdroje pravdy. Zároveň
-                                vznikla auditní historie změn v Git
-                                repozitáři i historie synchronizací
-                                v Argo CD.
-                            </p>
-                        </div>
+                <pre><code>ssh &lt;hostname&gt;
+sudo puppet agent -t
+sudo puppet agent --test --debug
+sudo systemctl status puppet
+sudo journalctl -u puppet -n 100</code></pre>
 
-                        <div class="result-timeline">
-                            <article>
-                                <span>01</span>
-                                <div>
-                                    <h3>Výchozí stav</h3>
-                                    <p>Dvě repliky definované v Git repozitáři.</p>
-                                </div>
-                            </article>
+                <p>
+                    Ruční spuštění agenta a kontrola logů potvrdily,
+                    že server nemůže dokončit SSL komunikaci
+                    s Puppet serverem.
+                </p>
+            </article>
 
-                            <article>
-                                <span>02</span>
-                                <div>
-                                    <h3>Simulace chyby</h3>
-                                    <p>Ruční změna Deploymentu na nula replik.</p>
-                                </div>
-                            </article>
+            <article class="command-card">
+                <h3>Kontrola certifikátu</h3>
 
-                            <article>
-                                <span>03</span>
-                                <div>
-                                    <h3>Detekce odchylky</h3>
-                                    <p>Argo CD porovnalo skutečný a požadovaný stav.</p>
-                                </div>
-                            </article>
+                <pre><code>sudo puppet cert list --all
+sudo puppet cert print &lt;hostname&gt;</code></pre>
 
-                            <article>
-                                <span>04</span>
-                                <div>
-                                    <h3>Automatická obnova</h3>
-                                    <p>Cluster byl obnoven zpět na dvě zdravé repliky.</p>
-                                </div>
-                            </article>
-                        </div>
+                <p>
+                    Na Puppet serveru jsem ověřil existující
+                    certifikát, jeho certname a stav v Puppet CA.
+                </p>
+            </article>
+        </div>
 
-                        <div class="media-grid media-grid-two">
-                            <figure class="media-card">
-                                <!-- Add image: images/kubernetes-terminal.jpg -->
-                                <img
-                                    src="images/kubernetes-terminal.jpg"
-                                    alt="Terminál zobrazující test automatické obnovy Kubernetes aplikace"
-                                    loading="lazy"
-                                    data-lightbox
-                                >
+        <div class="answer-text">
+            <p>
+                Po potvrzení problému jsem na Puppet serveru odstranil
+                starý certifikát daného hostu. V používaném prostředí
+                byla dostupná starší syntaxe příkazů Puppet CA.
+            </p>
+        </div>
 
-                                <figcaption>
-                                    Terminál zachycuje ruční změnu počtu
-                                    replik, následné vytvoření nových Podů
-                                    a dokončenou synchronizaci.
-                                </figcaption>
-                            </figure>
+        <div class="command-grid">
+            <article class="command-card">
+                <h3>Odstranění starého certifikátu</h3>
 
-                            <figure class="media-card">
-                                <!-- Add image: images/argocd-dashboard.jpg -->
-                                <img
-                                    src="images/argocd-dashboard.jpg"
-                                    alt="Obnovená aplikace ve stavu Healthy a Synced"
-                                    loading="lazy"
-                                    data-lightbox
-                                >
+                <pre><code>sudo puppet cert clean &lt;hostname&gt;</code></pre>
 
-                                <figcaption>
-                                    Výsledný stav po automatické nápravě:
-                                    aplikace je synchronizovaná, zdravá
-                                    a běží ve dvou replikách.
-                                </figcaption>
-                            </figure>
-                        </div>
+                <p>
+                    Starý nebo neplatný certifikát byl odstraněn
+                    z Puppet CA, aby mohl agent vytvořit nový
+                    certificate signing request.
+                </p>
+            </article>
 
-                        <div class="result-box">
-                            <span class="result-icon" aria-hidden="true">✓</span>
+            <article class="command-card">
+                <h3>Vyčištění SSL stavu agenta</h3>
 
-                            <div>
-                                <h3>Výsledek</h3>
+                <pre><code>sudo systemctl stop puppet
+sudo rm -rf /var/lib/puppet/ssl
+sudo systemctl start puppet
+sudo puppet agent -t --waitforcert 60</code></pre>
 
-                                <p>
-                                    Automatická náprava configuration driftu
-                                    proběhla úspěšně bez zásahu administrátora.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </details>
+                <p>
+                    Na spravovaném serveru jsem odstranil lokální
+                    kopii starých SSL dat a znovu spustil agenta,
+                    který vytvořil nový požadavek na certifikát.
+                </p>
+            </article>
+        </div>
+
+        <div class="answer-text">
+            <p>
+                Pokud nebylo v prostředí povoleno automatické
+                podepisování certifikátů, bylo následně potřeba
+                nový požadavek zkontrolovat a podepsat na Puppet
+                serveru.
+            </p>
+        </div>
+
+        <div class="command-grid">
+            <article class="command-card">
+                <h3>Kontrola a podepsání požadavku</h3>
+
+                <pre><code>sudo puppet cert list
+sudo puppet cert sign &lt;hostname&gt;</code></pre>
+
+                <p>
+                    Před podepsáním jsem ověřil název hostu
+                    a následně schválil nový certifikát.
+                </p>
+            </article>
+
+            <article class="command-card">
+                <h3>Finální ověření</h3>
+
+                <pre><code>sudo puppet agent -t
+sudo systemctl status puppet
+sudo journalctl -u puppet -n 50</code></pre>
+
+                <p>
+                    Po vydání nového certifikátu jsem znovu spustil
+                    agenta a ověřil, že konfigurace byla úspěšně
+                    načtena a aplikována.
+                </p>
+            </article>
+        </div>
+
+        <div class="answer-text">
+            <p>
+                Po obnovení certifikátu Puppet agent znovu navázal
+                komunikaci se serverem, stáhl aktuální katalog
+                a aplikoval požadovanou konfiguraci. Následně jsem
+                zkontroloval stav služby, Puppet logy a monitorovací
+                upozornění.
+            </p>
+
+            <p>
+                Při řešení jsem postupoval opatrně, protože odstranění
+                nesprávného certifikátu nebo certifikátu jiného hostu
+                by mohlo ovlivnit další spravovaný server. Proto jsem
+                před každým krokem ověřoval hostname, certname
+                a správné prostředí.
+            </p>
+        </div>
+
+        <div class="result-timeline">
+            <article>
+                <span>01</span>
+
+                <div>
+                    <h3>Identifikace chyby</h3>
+
+                    <p>
+                        Puppet agent nemohl navázat důvěryhodné
+                        SSL spojení s Puppet serverem.
+                    </p>
+                </div>
+            </article>
+
+            <article>
+                <span>02</span>
+
+                <div>
+                    <h3>Odstranění starého certifikátu</h3>
+
+                    <p>
+                        Neplatný záznam byl odstraněn z Puppet CA
+                        a z lokálního úložiště agenta.
+                    </p>
+                </div>
+            </article>
+
+            <article>
+                <span>03</span>
+
+                <div>
+                    <h3>Vytvoření nového požadavku</h3>
+
+                    <p>
+                        Agent vytvořil nový certificate signing
+                        request pro daný server.
+                    </p>
+                </div>
+            </article>
+
+            <article>
+                <span>04</span>
+
+                <div>
+                    <h3>Ověření výsledku</h3>
+
+                    <p>
+                        Puppet agent úspěšně stáhl katalog
+                        a aplikoval konfiguraci.
+                    </p>
+                </div>
+            </article>
+        </div>
+
+        <div class="result-box">
+            <span class="result-icon" aria-hidden="true">✓</span>
+
+            <div>
+                <h3>Výsledek</h3>
+
+                <p>
+                    Komunikace mezi Puppet agentem a Puppet serverem
+                    byla obnovena a centrální konfigurace se opět
+                    aplikovala bez SSL chyby.
+                </p>
+            </div>
+        </div>
+
+        <aside class="technical-note">
+            <h3>Poznámka k verzi Puppetu</h3>
+
+            <p>
+                Uvedené příkazy odpovídají starší syntaxi Puppet CA,
+                která byla používána v daném pracovním prostředí.
+                V novějších verzích se stejná operace provádí například
+                pomocí příkazů
+                <code>puppetserver ca list</code>,
+                <code>puppetserver ca clean</code>
+                a <code>puppetserver ca sign</code>.
+            </p>
+        </aside>
+    </div>
+</details>
             </div>
         </section>
 
