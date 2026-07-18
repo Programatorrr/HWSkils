@@ -1979,3 +1979,8 @@ html[data-theme="dark"] .answer-text code {
         gap: 7px;
     }
 }
+/* Prevent scroll jumps when accordion content changes */
+.accordion,
+.answer-card {
+    overflow-anchor: none;
+}
