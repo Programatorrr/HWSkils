@@ -1273,31 +1273,48 @@ html[data-theme="dark"] .button-cv:hover {
    ========================= */
 
 .site-footer {
-    display: flex;
-    min-height: 120px;
-    padding-block: 32px;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    min-height: 150px;
+    padding-block: 34px;
+    gap: 24px;
     border-top: 1px solid var(--border);
 }
 
-.site-footer div {
-    display: grid;
+.footer-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 36px;
 }
 
-.site-footer span {
+.footer-profile {
+    display: grid;
+    line-height: 1.45;
+}
+
+.footer-profile strong {
+    color: var(--text);
+}
+
+.footer-profile span {
     color: var(--text-soft);
     font-size: 0.82rem;
 }
 
-.site-footer a {
+.footer-actions {
+    display: flex;
+    align-items: center;
+    gap: 34px;
+}
+
+.back-to-top {
     position: relative;
     color: var(--text);
     font-weight: 800;
     text-decoration: none;
 }
 
-.site-footer a::after {
+.back-to-top::after {
     position: absolute;
     right: 0;
     bottom: -4px;
@@ -1305,13 +1322,24 @@ html[data-theme="dark"] .button-cv:hover {
     height: 3px;
     content: "";
     background: var(--green);
+    border-radius: 20px;
     transform: scaleX(0.35);
     transform-origin: left;
     transition: transform var(--transition);
 }
 
-.site-footer a:hover::after {
+.back-to-top:hover::after {
     transform: scaleX(1);
+}
+
+.portfolio-disclaimer {
+    max-width: 940px;
+    margin: 0;
+    padding-top: 20px;
+    color: var(--text-soft);
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem;
+    line-height: 1.65;
 }
 
 /* =========================
