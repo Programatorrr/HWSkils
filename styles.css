@@ -2023,3 +2023,24 @@ html[data-theme="dark"] .technical-note code {
 html[data-theme="dark"] .project-callout-secondary h3 {
     color: var(--text);
 }
+@media (max-width: 720px) {
+    .footer-top {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .footer-actions {
+        width: 100%;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 22px;
+    }
+
+    .developer-credit {
+        width: 100%;
+    }
+
+    .portfolio-disclaimer {
+        font-size: 0.74rem;
+    }
+}
