@@ -49,54 +49,7 @@ themeButton?.addEventListener("click", () => {
     applyTheme(root.dataset.theme === "dark" ? "light" : "dark");
 });
 
-/* Prague clock */
-const timeFormatter = new Intl.DateTimeFormat("cs-CZ", {
-    timeZone: "Europe/Prague",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit"
-});
 
-const dateFormatter = new Intl.DateTimeFormat("cs-CZ", {
-    timeZone: "Europe/Prague",
-    weekday: "short",
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric"
-});
-
-function updatePragueTime() {
-    const now = new Date();
-
-    if (pragueClock) pragueClock.textContent = timeFormatter.format(now);
-    if (pragueDate) pragueDate.textContent = dateFormatter.format(now);
-}
-
-updatePragueTime();
-setInterval(updatePragueTime, 1000);
-
-/* Time spent on page */
-const pageStartedAt = Date.now();
-
-function formatDuration(seconds) {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = seconds % 60;
-
-    return [hours, minutes, secs]
-        .map(value => String(value).padStart(2, "0"))
-        .join(":");
-}
-
-function updatePageTimer() {
-    if (!pageTimer) return;
-
-    const elapsed = Math.floor((Date.now() - pageStartedAt) / 1000);
-    pageTimer.textContent = formatDuration(elapsed);
-}
-
-updatePageTimer();
-setInterval(updatePageTimer, 1000);
 
 /* Mobile navigation */
 function setMenu(open) {
