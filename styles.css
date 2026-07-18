@@ -672,7 +672,13 @@ html[data-theme="dark"] .button-cv:hover {
     font-size: 1.14rem;
 }
 
-
+.status-item small {
+    display: block;
+    margin-top: 5px;
+    color: var(--text-soft);
+    font-size: 0.78rem;
+    line-height: 1.4;
+}
 
 .project-label {
     margin-bottom: 8px;
